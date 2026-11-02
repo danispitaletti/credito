@@ -72,6 +72,26 @@ Easing: entrada rápida, final suave (ease-out). Leve motion blur no movimento.
 - Entrada: pop rápido (escala 90 → 100 %, 0,1 s).
 
 ## 5. B-roll animado (identidade visual)
+
+> **DECISÃO DA DANI (teste aprovado em 02/11/2026): o padrão é a VERSÃO 1 — desenhos 2D
+> "recorte de papel" feitos pelo próprio Claude com código** (`scripts/render_teste.py`).
+> Não gerar imagens com IA por padrão. A versão realista com imagens 3D de IA
+> (`scripts/render_real.py`) foi testada e **não** foi a preferida — só usar se ela pedir.
+> Vantagens da versão 1: custo zero, sem depender de download de imagens, textos sem erro,
+> cada objeto anima exatamente na palavra falada.
+>
+> Pipeline da versão 1 (o que funcionou no teste):
+> 1. Transcrever: `scripts/transcreve.py` (Whisper small via sherpa-onnx; modelo baixado de
+>    github.com/k2-fsa/sherpa-onnx/releases, asr-models/sherpa-onnx-whisper-small.tar.bz2).
+>    Tempos por trecho com `silencedetect` (−32 dB, 0,12 s) e palavras distribuídas por tamanho.
+> 2. Cortar pausas (padding 0,08 s) e normalizar áudio (loudnorm −14 LUFS).
+> 3. Rastrear o rosto (OpenCV haar cascade, opencv-python-headless < 5) para o recorte da meia tela.
+> 4. Desenhar cada cena como sprites com contorno escuro + sombra (PIL, supersampling 2x),
+>    fundo de papel kraft listrado com piso de madeira; objetos com etiqueta de texto;
+>    pop com ease-back na palavra; push-in lento; whip entre cenas.
+> 5. Fonte: Montserrat Black/ExtraBold via `npm pack @fontsource/montserrat` (arquivos .woff).
+> 6. Compor quadro a quadro e exportar 1080×1920, 30 fps, H.264 CRF 18.
+>
 - Estilo **2D flat "recorte de papel"**: textura de papel/papelão, contorno escuro, sombras suaves,
   cenário em **perspectiva 3D leve** (cidade/rua vista de cima, câmera que se move).
 - Paleta: bege kraft **#D5BD8F**, céu azul-acinzentado, tons pastel (rosa, verde-menta, azul),
