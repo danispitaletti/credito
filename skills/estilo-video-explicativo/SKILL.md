@@ -167,6 +167,9 @@ STORYBOARD → ela aprova/ajusta → Claude renderiza e entrega → ajustes.
   para dar tempo de ler. Ver `CARD_MENT` e `sA_cta` em `scripts/render_v3.py`.
 - Modelo mais recente: `scripts/render_v3.py` (vídeo "Imposto no PIX", fonte 480×854).
   Vídeos de fonte pequena: zoom do rosto em tela cheia 1.18 (em vez de 1.32).
+- **Enquadramento do rosto FIXO por bloco** (`face_block` em `render_v3.py`): usar a mediana da
+  posição do rosto no bloco inteiro e manter o recorte parado, como câmera no tripé. NÃO seguir o
+  rosto quadro a quadro — isso fez o vídeo "tremer" e a Dani reprovou.
 - Toda cena nova deve ter algum objeto visível já no 1º quadro (pop começando ~0,3 s antes) —
   nunca deixar painel vazio enquanto a fala acontece.
 

@@ -631,14 +631,24 @@ def face_xy(st):
     if not m.any(): return float(np.interp(st, FT_, FX_)), float(np.interp(st, FT_, FY_))
     return float(np.median(FX_[m])), float(np.median(FY_[m]))
 
+_FB = {}
+def face_block(t):
+    """posição FIXA do rosto por bloco (mediana do bloco inteiro) — câmera parada, sem tremer"""
+    bi, b = block_at(t)
+    if bi not in _FB:
+        s0, s1 = out2src(b['t0'] + 0.01), out2src(b['t1'] - 0.01)
+        m = (FT_ >= s0) & (FT_ <= s1)
+        _FB[bi] = (float(np.median(FX_[m])), float(np.median(FY_[m]))) if m.sum() >= 3 else (float(np.median(FX_)), float(np.median(FY_)))
+    return _FB[bi]
+
 def presenter_split(fr, t):
-    cx, cy = face_xy(out2src(t)); ch = int(SRC_W * 960 / W)
+    cx, cy = face_block(t); ch = int(SRC_W * 960 / W)
     top = int(min(max(cy - 0.42 * ch, 0), SRC_H - ch))
     return fr.crop((0, top, SRC_W, top + ch)).resize((W, 960), Image.LANCZOS)
 
 def presenter_full(fr, t, zoom=1.0):
     if zoom <= 1.0: return fr.resize((W, H), Image.LANCZOS)
-    cx, cy = face_xy(out2src(t)); ww, hh = SRC_W / zoom, SRC_H / zoom
+    cx, cy = face_block(t); ww, hh = SRC_W / zoom, SRC_H / zoom
     x0 = min(max(cx - ww / 2, 0), SRC_W - ww); y0 = min(max(cy - 0.40 * hh, 0), SRC_H - hh)
     return fr.crop((int(x0), int(y0), int(x0 + ww), int(y0 + hh))).resize((W, H), Image.LANCZOS)
 
