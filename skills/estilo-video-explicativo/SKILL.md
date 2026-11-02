@@ -12,8 +12,10 @@ Quadros de referência na pasta `referencias/` desta skill — **olhe-os antes d
 ## 1. Formato técnico
 - Vertical **1080×1920** (refs em 720×1280), **30 fps** (24 também serve).
 - Áudio: só a **voz**, sem trilha de fundo contínua. Loudness final **−14 LUFS**.
-- Duração alvo: **80–100 s**.
-- Fala **sem respiros**: cortar todas as pausas > 0,15 s (jump cuts colados).
+- Duração: a que a fala da Dani tiver (o vídeo aprovado tinha 60 s).
+- **Velocidade sempre 1.0.** Cortar só os silêncios, deixando **respiro natural**: padding de
+  0,16 s antes e depois de cada trecho de fala (pausas curtas ficam inteiras, longas viram ~0,3 s).
+  Cortes mais secos que isso deixaram o vídeo "acelerado" — a Dani reprovou.
 - Marca d'água: avatar redondo + `@usuario` pequeno, branco, opacidade ~80 %,
   à esquerda logo abaixo da linha da divisão (y ≈ 57 % da altura).
 
@@ -121,21 +123,36 @@ Easing: entrada rápida, final suave (ease-out). Leve motion blur no movimento.
 4. **Virada/conselho** em C ("pare de usar", "invista no dia do salário").
 5. **Solução prática + fechamento** em A.
 
-## 8. Passo a passo para editar um vídeo novo
-1. Receber o vídeo bruto (Dani falando para câmera, vertical). Se possível, gravado com folga
-   de enquadramento para permitir o punch-in.
-2. Transcrever com tempos por palavra (pipeline da skill `editar-video-dani`) e cortar pausas.
-3. Dividir o roteiro em blocos e marcar cada trecho como **A, B ou C** seguindo o ciclo do §2.
-   Mostrar esse mapa para a Dani aprovar antes de gerar animações.
-4. Para cada bloco B (e para a metade de cima dos blocos A), escrever o **prompt de animação**
-   no estilo do §5 (usar a skill `image-prompt-generator` / gerar no Kairogen). Sempre citar:
-   "2D flat paper-cutout animation, cardboard texture, kraft beige background, pastel city,
-   character with sign 'VOCÊ', vertical 9:16, slow camera push-in".
-5. Montar: layout A (animação 1080×960 em cima, rosto 1080×960 embaixo, borda rasgada no meio),
-   B (animação 1080×1920), C (rosto 1080×1920 com zoom alternado).
-6. Aplicar as duas camadas de legenda do §4 (título só com palavras-chave; caixinha karaokê).
-7. Transições do §3. Normalizar áudio em −14 LUFS.
-8. Exportar 1080×1920, H.264, 30 fps. Conferir: abre em A, fecha em A, C curto, nenhum plano parado > 4 s.
+## 8. Passo a passo para editar um vídeo novo (o que o Claude faz)
+
+**Modelo pronto:** `scripts/render_v2.py` (vídeo "Bloqueio judicial / DeFi", APROVADO pela Dani).
+Para um vídeo novo, copie esse arquivo e troque SÓ: a lista `SEGS`, a lista `BLOCKS`, as funções
+de cena (`sA_*` para tela dividida 1080×960, `sB_*` para b-roll 1080×1920), o dicionário `SCENES`
+e os conjuntos de palavras coloridas `YW` (amarelo) e `RW` (vermelho). Todo o resto — legendas,
+transições, tela dividida, zoom, marca d'água — já está pronto e não deve ser mudado.
+
+1. **Receber o vídeo** — a Dani anexa no chat (o Dropbox/Canva/Kairogen não baixam neste ambiente:
+   a rede bloqueia). Se vier pelo WhatsApp a resolução cai; pedir o original quando possível.
+2. **Preparar ferramentas** (sessão nova):
+   - `pip install sherpa-onnx "opencv-python-headless<5"`
+   - Whisper: `curl -L -o w.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-small.tar.bz2 && tar xjf w.tar.bz2`
+   - Fonte: `npm pack @fontsource/montserrat@5.0.19 && tar xzf fontsource-montserrat-*.tgz` (pasta `fonts/`)
+3. **Transcrever**: `silencedetect=n=-32dB:d=0.12` → `scripts/transcreve_trechos.py` (um trecho por
+   frase). Reler trechos estranhos com janela maior (`scripts/transcreve.py`). Corrigir erros óbvios
+   pelo contexto (ex.: "queijo judicial" = "bloqueio judicial"). Mostrar a transcrição para a Dani.
+4. **Rastrear o rosto** (haar cascade a cada 10 quadros → `face.json`) para o recorte da meia tela.
+5. **Mapa A/B/C** seguindo o ciclo do §2: abre em A (gancho), B nas explicações/exemplos/números,
+   C curto nas perguntas diretas e frases de impacto, fecha em A (CTA). Cada frase vira uma cena
+   com objetos que representam o que ela diz, com etiqueta de texto, e cada objeto aparece
+   (pop) exatamente na palavra falada.
+6. **Cortar pausas** (padding 0,16 s) e normalizar o áudio (`highpass=80, acompressor, loudnorm I=-14`).
+7. **Prévia**: `python3 render.py PASTA t1 t2 ...` gera quadros soltos. Montar uma folha e conferir:
+   título não cobre os desenhos (máx. 4 palavras por título, objetos com centro em y≈600 no painel A),
+   nenhum quadro vazio na troca de cena (pop dos objetos da cena nova começa ~0,3 s ANTES do início dela).
+8. **Render final** (~3 min por minuto de vídeo) → conferir folha de quadros a cada 0,7 s → enviar.
+
+Fluxo com a Dani: ela grava o texto inteiro de uma vez falando para a câmera (busto, celular
+vertical, câmera parada, luz de frente) → manda aqui → Claude entrega o vídeo pronto → ajustes.
 
 ## 9. Checklist final
 - [ ] Abre com gancho em tela dividida
