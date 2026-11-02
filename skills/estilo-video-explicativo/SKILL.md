@@ -8,6 +8,7 @@ description: Padrão de edição de vídeo da Dani Sanverino no formato "explica
 Fonte: decupagem de 2 vídeos de referência (85 s e 100 s), salvos no Dropbox em
 `/Padrao de Edicao de Video/Modelo 1` e `/Modelo 2`. Os dois têm **o mesmo estilo**.
 Quadros de referência na pasta `referencias/` desta skill — **olhe-os antes de editar**.
+Os arquivos `referencias/aprovado_*.jpg` são do vídeo da Dani APROVADO (versão 1): é exatamente esse o visual a repetir.
 
 ## 1. Formato técnico
 - Vertical **1080×1920** (refs em 720×1280), **30 fps** (24 também serve).
