@@ -1,0 +1,10 @@
+"""Remove ruídos de fundo (latidos etc.) mantendo só a voz — modelo GTCRN (sherpa-onnx). Uso: gtcrn.onnx entrada16k.wav saida.wav"""
+import sys, wave, numpy as np, sherpa_onnx
+m, inp, out = sys.argv[1:4]
+cfg = sherpa_onnx.OfflineSpeechDenoiserConfig(model=sherpa_onnx.OfflineSpeechDenoiserModelConfig(gtcrn=sherpa_onnx.OfflineSpeechDenoiserGtcrnModelConfig(model=m), num_threads=4))
+dn = sherpa_onnx.OfflineSpeechDenoiser(cfg)
+w = wave.open(inp); sr = w.getframerate(); a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+r = dn(a, sr)
+y = np.clip(np.array(r.samples), -1, 1)
+o = wave.open(out, 'wb'); o.setnchannels(1); o.setsampwidth(2); o.setframerate(r.sample_rate); o.writeframes((y * 32767).astype(np.int16).tobytes()); o.close()
+print('ok', r.sample_rate, len(y) / r.sample_rate)

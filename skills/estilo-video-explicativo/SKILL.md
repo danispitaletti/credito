@@ -167,6 +167,13 @@ STORYBOARD → ela aprova/ajusta → Claude renderiza e entrega → ajustes.
   para dar tempo de ler. Ver `CARD_MENT` e `sA_cta` em `scripts/render_v3.py`.
 - Modelo mais recente: `scripts/render_v3.py` (vídeo "Imposto no PIX", fonte 480×854).
   Vídeos de fonte pequena: zoom do rosto em tela cheia 1.18 (em vez de 1.32).
+- **Limpar ruído de fundo (latido de cachorro etc.)** — a Dani grava em casa e há cachorro:
+  1. Detectar: `scripts/acha_latido.py` (modelo CED audio-tagging, GitHub k2-fsa/sherpa-onnx
+     releases `audio-tagging-models/sherpa-onnx-ced-mini-audio-tagging-2024-04-19.tar.bz2`).
+  2. Limpar: `scripts/limpa_voz.py` (modelo GTCRN, releases `speech-enhancement-models/gtcrn_simple.onnx`)
+     sobre o áudio 16 kHz; depois juntar: GTCRN reamostrado (lowpass 7,6 kHz) + original
+     highpass 7,6 kHz × 0,5, e loudnorm −14. Conferir de novo com o detector (deve ficar ~0)
+     e retranscrever para garantir que a voz não foi afetada.
 - **Enquadramento do rosto FIXO por bloco** (`face_block` em `render_v3.py`): usar a mediana da
   posição do rosto no bloco inteiro e manter o recorte parado, como câmera no tripé. NÃO seguir o
   rosto quadro a quadro — isso fez o vídeo "tremer" e a Dani reprovou.
