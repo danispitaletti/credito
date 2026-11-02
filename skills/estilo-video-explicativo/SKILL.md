@@ -84,7 +84,9 @@ Easing: entrada rápida, final suave (ease-out). Leve motion blur no movimento.
 > 1. Transcrever: `scripts/transcreve.py` (Whisper small via sherpa-onnx; modelo baixado de
 >    github.com/k2-fsa/sherpa-onnx/releases, asr-models/sherpa-onnx-whisper-small.tar.bz2).
 >    Tempos por trecho com `silencedetect` (−32 dB, 0,12 s) e palavras distribuídas por tamanho.
-> 2. Cortar pausas (padding 0,08 s) e normalizar áudio (loudnorm −14 LUFS).
+> 2. Cortar pausas com **padding 0,16 s** de cada lado (pausas curtas ficam inteiras, longas viram
+>    ~0,3 s) e normalizar áudio (loudnorm −14 LUFS). **Velocidade sempre 1.0.** Com 0,08 s a Dani
+>    achou o vídeo "acelerado" — não usar menos que 0,16 s.
 > 3. Rastrear o rosto (OpenCV haar cascade, opencv-python-headless < 5) para o recorte da meia tela.
 > 4. Desenhar cada cena como sprites com contorno escuro + sombra (PIL, supersampling 2x),
 >    fundo de papel kraft listrado com piso de madeira; objetos com etiqueta de texto;

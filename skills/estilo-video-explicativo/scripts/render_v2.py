@@ -33,7 +33,7 @@ SEGS = [
     (58.141, 60.309, "PARA SE PROTEGER E PROTEGER O SEU PATRIMÔNIO"), (60.720, 61.841, "CLICA EM SAIBA MAIS"),
     (62.281, 63.486, "E APLIQUE-SE PARA A MENTORIA"),
 ]
-PAD = 0.08
+PAD = 0.16
 cuts, words = [], []
 out = 0.0
 for i, (a, b, txt) in enumerate(SEGS):
