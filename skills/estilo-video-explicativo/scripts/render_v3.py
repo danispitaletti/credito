@@ -518,8 +518,8 @@ def sA_atrapalha(t):
 
 def sB_solucao(t):
     im = BG_B_SKY.copy()
-    sc = pop(t, T(19) - 0.1)
-    paste_scaled(im, BULB, 540, 900, sc * 1.6)
+    sc = pop(t, T(18) - 0.35)
+    paste_scaled(im, BULB, 540, 900, sc * 1.6 * (1 + 0.08 * pop(t, T(19), 0.25) * (1 - clamp01((t - T(19) - 0.25) / 0.3))))
     if t > T(19):
         d = ImageDraw.Draw(im); k = clamp01((t - T(19)) / 0.4)
         for i in range(10):
@@ -564,15 +564,26 @@ def sA_fluxo(t):
     paste_scaled(im, XMARK, 920, 700, pop(t, WT(29, 3), 0.2) * 0.5)
     return im
 
+def card_mentoria():
+    def f(d, s):
+        rrect(d, s, (10, 10, 790, 330), 26, WHITE, w=7)
+        ctext(d, (400, 70), s, "MENTORIA", 62, RED)
+        ctext(d, (400, 135), s, "PARA EMPRESÁRIOS COM", 34, INK, False)
+        ctext(d, (400, 180), s, "PATRIMÔNIO ESTABELECIDO", 34, INK, False)
+        rrect(d, s, (150, 215, 650, 305), 18, (60, 160, 95), w=5)
+        ctext(d, (400, 261), s, "+100k INVESTIDOS", 50, WHITE)
+    return sprite(800, 340, f)
+CARD_MENT = card_mentoria()
+
 def sA_cta(t):
     im = BG_A.copy()
     tb = T(30) - 0.4
     press = 0.92 if WT(30, 4) < t < WT(30, 4) + 0.2 else 1.0
-    paste_scaled(im, BTN, 540, 470, pop(t, tb) * press)
+    paste_scaled(im, BTN, 540, 420, pop(t, tb) * press * 0.9)
     k = ease_out((t - tb - 0.1) / 0.5)
-    paste_scaled(im, HAND, 760 - 120 * k + 400 * (1 - k), 580 + 300 * (1 - k), 0.7 if t > tb else 0, rot=20)
-    paste_scaled(im, tag("MENTORIA", RED, 56), 540, 790, pop(t, WT(31, 5)))
-    sparkles(im, t, WT(31, 5) + 0.1, [(250, 760), (840, 720), (180, 420), (900, 400)])
+    paste_scaled(im, HAND, 720 - 100 * k + 400 * (1 - k), 500 + 300 * (1 - k), 0.6 if t > tb else 0, rot=20)
+    paste_scaled(im, CARD_MENT, 540, 700, pop(t, T(31) - 0.1) * 0.95)
+    sparkles(im, t, T(31) + 0.1, [(110, 560), (970, 560), (120, 860), (960, 860)], 0.7)
     return im
 
 SCENES = {
@@ -787,15 +798,17 @@ def compose(fr, t):
     return c.convert('RGB')
 
 if __name__ == '__main__':
-    n = int(TOTAL * FPS); only = [float(x) for x in sys.argv[2:]]
+    HOLD = 2.0
+    n = int((TOTAL + HOLD) * FPS); only = [float(x) for x in sys.argv[2:]]
     rd = subprocess.Popen(['ffmpeg', '-v', 'error', '-i', os.path.join(BASE, 'cut.mp4'), '-vf', f'fps={FPS},scale={SRC_W}:{SRC_H}', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], stdout=subprocess.PIPE)
     wr = None if only else subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
         '-i', os.path.join(BASE, 'audio_cut.wav'), '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p',
-        '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', os.path.join(BASE, 'video_final.mp4')], stdin=subprocess.PIPE)
+        '-c:a', 'aac', '-b:a', '192k', '-af', 'apad', '-t', f'{TOTAL + HOLD:.2f}', '-movflags', '+faststart', os.path.join(BASE, 'video_final.mp4')], stdin=subprocess.PIPE)
     fsz = SRC_W * SRC_H * 3
     for i in range(n):
-        buf = rd.stdout.read(fsz)
-        if len(buf) < fsz: break
+        nb = rd.stdout.read(fsz)
+        if len(nb) == fsz: buf = nb
+        elif i < int(TOTAL * FPS) - 2: break
         t = i / FPS
         if only:
             if any(abs(t - x) < 0.5 / FPS for x in only):

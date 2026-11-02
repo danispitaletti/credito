@@ -153,7 +153,22 @@ transições, tela dividida, zoom, marca d'água — já está pronto e não dev
 8. **Render final** (~3 min por minuto de vídeo) → conferir folha de quadros a cada 0,7 s → enviar.
 
 Fluxo com a Dani: ela grava o texto inteiro de uma vez falando para a câmera (busto, celular
-vertical, câmera parada, luz de frente) → manda aqui → Claude entrega o vídeo pronto → ajustes.
+vertical, câmera parada, luz de frente) → manda aqui → Claude mostra a TRANSCRIÇÃO e o
+STORYBOARD → ela aprova/ajusta → Claude renderiza e entrega → ajustes.
+
+- **Storyboard antes do render** (aprovado pela Dani): `python3 scripts/storyboard.py render.py PASTA "Título" saida.jpg`
+  gera uma folha com 1 quadro por cena, o formato (cores: azul = tela dividida, verde = b-roll,
+  laranja = rosto) e a fala. Enviar com uma tabela "nº | formato | fala | o que aparece".
+- **Vídeo grande (> ~30 MB)** não anexa no chat: pedir para ela mandar para si mesma no WhatsApp
+  (sem HD), salvar e anexar. Fica 480p–720p, aceitável.
+- **CTA da mentoria (padrão):** sempre que o vídeo falar da mentoria, a cena final mostra o botão
+  "SAIBA MAIS" + o cartão: **MENTORIA / para empresários com patrimônio estabelecido / +100k INVESTIDOS**
+  ("100k" — sem "reais" nem "dólares"). Segurar a imagem final por **2 s** (áudio com silêncio)
+  para dar tempo de ler. Ver `CARD_MENT` e `sA_cta` em `scripts/render_v3.py`.
+- Modelo mais recente: `scripts/render_v3.py` (vídeo "Imposto no PIX", fonte 480×854).
+  Vídeos de fonte pequena: zoom do rosto em tela cheia 1.18 (em vez de 1.32).
+- Toda cena nova deve ter algum objeto visível já no 1º quadro (pop começando ~0,3 s antes) —
+  nunca deixar painel vazio enquanto a fala acontece.
 
 ## 9. Checklist final
 - [ ] Abre com gancho em tela dividida
