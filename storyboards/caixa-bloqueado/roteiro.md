@@ -22,3 +22,9 @@ Troca feita: "sem CPF e sem CNPJ" → "com mais privacidade e autonomia sobre o 
 | 12 | Tela dividida | Toque em Saiba mais e aplique-se para uma reunião estratégica. |
 
 Status: storyboard aguardando aprovação da Dani. Os rostos do storyboard são ilustrativos.
+
+## Regras da Dani (03/11)
+- Nada parado: todo B-roll e animação em vídeo, com movimento/cara de 3D. Sem foto estática, sem desenho infantil.
+- Legenda igual à da Tay: branca, centro, sem caixa, sombra leve, tamanhos empilhados (cursiva + palavra em terracota + palavra grande).
+- Cor da marca: terracota #A3482F.
+- Storyboard sempre antes de gerar; de preferência como prévia em vídeo (previa/).
