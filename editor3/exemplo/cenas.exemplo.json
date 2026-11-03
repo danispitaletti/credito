@@ -1,0 +1,16 @@
+{
+  "video": "video.mp4",
+  "foco_y": 0.42,
+  "correcoes": {"cloud": "Claude", "SQL": "skill", "Leven": "Eleven", "Lebs": "Labs"},
+  "cenas": [
+    {"inicio": 0, "tipo": "numero", "kicker": "Exemplos da referência", "titulo": ["ANIMAÇÕES QUE", "PRENDEM O OLHAR."], "numero": "24,9", "rotulo": "MILHÕES", "sub": "soma das visualizações"},
+    {"inicio": 5.0, "tipo": "titulo", "kicker": "Sem animar nada", "titulo": ["UM VÍDEO.", "ZERO ANIMAÇÃO."], "grande": "Claude"},
+    {"inicio": 9.54, "tipo": "imagem", "kicker": "Referências", "titulo": ["UM FORMATO.", "VÁRIOS ASSUNTOS."], "imagens": ["img0.png", "img1.png", "img2.png"], "troca": 0.35},
+    {"inicio": 13.16, "tipo": "numero", "kicker": "Referências", "titulo": ["PARECE ESTÚDIO.", "NÃO É."], "numero": "13", "rotulo": "VÍDEOS", "sub": "em menos de 2 semanas"},
+    {"inicio": 16.04, "tipo": "comparacao", "kicker": "Do conceito ao vídeo", "titulo": ["UMA SKILL.", "20 MINUTOS."], "a": "SKILL.md", "b": "20", "rotulo_b": "minutos"},
+    {"inicio": 19.66, "tipo": "imagem", "kicker": "Exemplo ilustrativo", "titulo": ["UMA IDEIA.", "UM EXEMPLO PRONTO."], "imagem": "img1.png"},
+    {"inicio": 25.2, "tipo": "lista", "kicker": "Produção em uma skill", "titulo": ["O CONCEITO ENTRA.", "O VÍDEO SAI."], "itens": ["Roteiro", "Animações", "Legendas", "Narração"]},
+    {"inicio": 31.74, "tipo": "onda", "kicker": "Narração com IA", "titulo": ["DÊ DIREÇÃO", "PARA A VOZ."], "rotulo": "ElevenLabs", "nota": "Descreva em texto como a voz deve atuar."},
+    {"inicio": 37.6, "tipo": "cta", "kicker": "Receba o passo a passo", "titulo": ["COMENTA", "SKILL"], "palavra": "SKILL"}
+  ]
+}
