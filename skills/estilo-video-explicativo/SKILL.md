@@ -167,6 +167,17 @@ STORYBOARD → ela aprova/ajusta → Claude renderiza e entrega → ajustes.
   para dar tempo de ler. Ver `CARD_MENT` e `sA_cta` em `scripts/render_v3.py`.
 - Modelo mais recente: `scripts/render_v3.py` (vídeo "Imposto no PIX", fonte 480×854).
   Vídeos de fonte pequena: zoom do rosto em tela cheia 1.18 (em vez de 1.32).
+- **ÁUDIO PADRÃO (sempre):** usar `scripts/prepara_corte.py render.py PASTA PASTA_MODELOS` — ele faz
+  numa tacada: limpeza dupla (GTCRN → DPDFNet4), mantém o "ar" acima de 7,6 kHz, **portão de
+  silêncio** nos respiros (só a fala passa; −80 dB entre frases), corte das pausas (PAD do render)
+  e loudnorm −14. Modelos (GitHub k2-fsa/sherpa-onnx releases `speech-enhancement-models/`):
+  `gtcrn_simple.onnx` e `dpdfnet4.onnx`. Conferir no fim com `acha_latido.py` (tudo < 5 %) e
+  retranscrever o áudio cortado ANTES do loudnorm para checar que nenhuma sílaba sumiu.
+- **NÃO usar estabilização digital (vidstab)** nos vídeos da Dani: com ela ocupando o quadro, o
+  algoritmo confunde o movimento do corpo com o da câmera e piora. O tremido sempre veio do
+  recorte que seguia o rosto — resolvido com enquadramento fixo por bloco.
+- **Se ela juntar vídeos no XiaoYing/CapCut** e reclamar de algo, remontar a partir das gravações
+  originais (render de cada parte + `concat` no ffmpeg), nunca corrigir por cima da exportação.
 - **Limpar ruído de fundo (latido de cachorro etc.)** — a Dani grava em casa e há cachorro:
   1. Detectar: `scripts/acha_latido.py` (modelo CED audio-tagging, GitHub k2-fsa/sherpa-onnx
      releases `audio-tagging-models/sherpa-onnx-ced-mini-audio-tagging-2024-04-19.tar.bz2`).

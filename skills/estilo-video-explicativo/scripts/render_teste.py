@@ -28,7 +28,7 @@ SEGS = [
     (10.234, 11.540, "DÉBITO AUTOMÁTICO"),
     (11.903, 13.945, "DIRETO DA SUA CONTA"),
 ]
-PAD = 0.08
+PAD = 0.16
 WEIGHT = {"2027": 7}
 
 cuts = []        # (src_ini, src_fim, out_ini)
@@ -351,15 +351,17 @@ def face_cy(src_t):
     m = (ts > src_t - 0.6) & (ts < src_t + 0.6)
     return float(ys[m].mean()) if m.any() else float(np.interp(src_t, ts, ys))
 
+FACE_FIX = float(np.median([f[1] for f in FACE]))   # enquadramento FIXO (sem tremer)
+
 def presenter_split(frame, t):
-    cy = face_cy(out2src(t)); ch = 427
+    cy = FACE_FIX; ch = 427
     top = int(min(max(cy - 0.42 * ch, 0), SRC_H - ch))
     return frame.crop((0, top, SRC_W, top + ch)).resize((W, 960), Image.LANCZOS)
 
 def presenter_full(frame, t, zoom):
     im = frame.resize((W, int(SRC_H * W / SRC_W)), Image.LANCZOS)
     if zoom > 1:
-        cy = face_cy(out2src(t)) * W / SRC_W
+        cy = FACE_FIX * W / SRC_W
         big = im.resize((int(im.width * zoom), int(im.height * zoom)), Image.LANCZOS)
         cx = big.width // 2; cyb = int(cy * zoom)
         top = int(min(max(cyb - 0.40 * H, 0), big.height - H))
