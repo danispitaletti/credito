@@ -169,6 +169,14 @@ STORYBOARD → ela aprova/ajusta → Claude renderiza e entrega → ajustes.
   para dar tempo de ler. Ver `CARD_MENT` e `sA_cta` em `scripts/render_v3.py`.
 - Modelo mais recente: `scripts/render_v3.py` (vídeo "Imposto no PIX", fonte 480×854).
   Vídeos de fonte pequena: zoom do rosto em tela cheia 1.18 (em vez de 1.32).
+- **ONDE SALVAR OS VÍDEOS PRONTOS (sempre):** pasta Dropbox **`/fotos dani`**
+  (no PC dela: `C:\Users\Dani\Dropbox\fotos dani`). O conector Dropbox só cria texto, então o envio
+  é pela **solicitação de arquivo** já criada para essa pasta: `https://www.dropbox.com/request/h8mnnh4sl065msqmy8i2`
+  (aberta, sem prazo). Comando: `NODE_PATH=$(npm root -g) node scripts/envia_dropbox.js danispitaletti.eventos@gmail.com video1.mp4 [video2.mp4]`
+  (a Dani autorizou usar esse e-mail no formulário). A rede do ambiente precisa liberar `*.dropbox.com`
+  e `*.dropboxusercontent.com`. Os arquivos chegam com o prefixo "Claude - edicao estilo sardinha - ".
+  Conferir com a busca do Dropbox e só então dizer que salvou. Também mandar o cartão do vídeo no chat.
+- **Receber vídeo grande:** a Dani manda o link do Dropbox; baixar com `curl -L "<link com dl=1>"`.
 - **ÁUDIO PADRÃO (sempre):** usar `scripts/prepara_corte.py render.py PASTA PASTA_MODELOS` — ele faz
   numa tacada: limpeza dupla (GTCRN → DPDFNet4), mantém o "ar" acima de 7,6 kHz, **portão de
   silêncio** nos respiros (só a fala passa; −80 dB entre frases), corte das pausas (PAD do render)
