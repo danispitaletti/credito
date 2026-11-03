@@ -1,9 +1,11 @@
 ---
-name: estilo-video-explicativo
-description: Padrão de edição de vídeo da Dani Sanverino no formato "explicativo animado" — vídeo vertical 9:16 que alterna TELA DIVIDIDA (animação 2D em cima, apresentador embaixo), B-ROLL ANIMADO EM TELA CHEIA e APRESENTADOR EM TELA CHEIA, com legenda dupla (título grande em cima + legenda em caixinha palavra por palavra). Use SEMPRE que a Dani disser "edita esse vídeo no meu estilo", "edita no estilo explicativo", "no estilo dos vídeos de referência", "tela dividida com animação", "faz igual aos modelos", "decupa/edita como o modelo 1/modelo 2", ou mandar um vídeo bruto falando para câmera pedindo edição. Funciona junto com a skill editar-video-dani (transcrição e cortes); esta skill define o VISUAL.
+name: estilo-sardinha
+description: ESTILO SARDINHA — o padrão de edição de vídeo da Dani Sanverino (@dani.defibit). Vídeo vertical 9:16 que alterna TELA DIVIDIDA (animação 2D "recorte de papel" em cima, Dani embaixo), B-ROLL ANIMADO EM TELA CHEIA e DANI EM TELA CHEIA, com legenda dupla (título grande palavra por palavra em cima + legenda em caixinha com marca-texto amarelo), desenhos feitos pelo Claude com código, áudio limpo (sem latido/ruído), enquadramento fixo e velocidade 1.0. Use SEMPRE que a Dani disser "estilo sardinha", "edita no estilo sardinha", "faz sardinha", "edita esse vídeo no meu estilo", "edita no estilo explicativo", "tela dividida com animação", "faz igual aos modelos", ou mandar um vídeo bruto falando para a câmera (anexo ou link do Dropbox) pedindo edição. Funciona junto com a skill editar-video-dani; esta skill define o VISUAL e o processo completo.
 ---
 
-# Estilo "Explicativo Animado" — guia de edição
+# ESTILO SARDINHA — guia de edição da Dani
+
+> Nome dado pela Dani em 03/11/2026. "Estilo sardinha" = este padrão completo.
 
 Fonte: decupagem de 2 vídeos de referência (85 s e 100 s), salvos no Dropbox em
 `/Padrao de Edicao de Video/Modelo 1` e `/Modelo 2`. Os dois têm **o mesmo estilo**.
