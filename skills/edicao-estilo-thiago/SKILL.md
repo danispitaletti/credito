@@ -79,3 +79,45 @@ Voz limpa a −14 LUFS; música (se houver) ~10 dB abaixo da voz; whoosh sutil n
 ## Checklist antes de entregar
 
 Extrair 1 quadro a cada 2 s e conferir: palavra cortada; legenda errada, atrasada ou adiantada; texto/elemento sobre o rosto; elemento fora da área segura; transição seca; flash ou frame solto; tela preta; imagem congelada; áudio fora de sincronia; duração acima de 3 min. Corrigir antes de entregar.
+
+## Regras confirmadas pela Dani (03/11/2026)
+
+- **Sem letra cursiva** em lugar nenhum (nem legenda, nem título).
+- **Legenda neutra do Thiago:** 1–3 palavras, branca, sans extra-bold, sombra suave, sem caixa, sem palavra colorida. A cor fica nos títulos e gráficos.
+- **Cores reais / tema por assunto**, nunca tudo numa cor só: bandeira do país na cor real (Chile vermelho, Brasil verde/amarelo), imposto/governo em azul-marinho, queda boa em verde, carimbo em vermelho, cripto/chave em dourado champagne, cofre em aço, gelo em azul claro. Terracota #A3482F só como detalhe de marca.
+- **Nada parado:** todo elemento em movimento, com cara de 3D. Sem desenho infantil.
+- **Vídeo sem pessoa é permitido:** narração (voz de catálogo ou clone) + 3D + infográficos.
+- **Antes do vídeo completo:** mandar uma prévia curta (10 s) renderizada, além do plano em tabela.
+
+## Recursos extras (referência: carrossel de ferramentas do @fabianocarvalhojr)
+
+Usar quando ajudarem a dar mais elementos ao vídeo. Entre parênteses, como fazer neste ambiente.
+
+**Edição do bruto**
+- Cortar silêncios, vícios de fala e respiros; jump cuts; recorte por tempo exato; exportar pronto (ffmpeg + transcrição por palavra).
+- Correção de cor automática e legendas na exportação.
+
+**Animação e gráficos em movimento**
+- Títulos animados, aberturas e encerramentos com texto fluido; vídeos explicativos (Remotion: React + molas/spring, transições, 3D com Three.js).
+- Motion graphics da marca: gráficos, contadores, linhas do tempo, painéis de vidro, transições.
+- Transformar sites/apps em vídeo de produto com cara de cinema (gravação/render da interface + movimento de câmera).
+- HyperFrames: só se a conexão estiver ativa; o Remotion cumpre o mesmo papel.
+
+**Shorts e recursos visuais**
+- Cortar vídeos longos em vários clipes curtos e achar os melhores momentos.
+- Reenquadrar horizontal → vertical 9:16.
+- B-roll sobreposto em vídeo de gente falando (cards, tela cheia, meia tela).
+- Capas/thumbnails com a marca.
+
+**Análise de vídeo e legendas**
+- Ver o vídeo e sugerir melhorias: extrair quadros a cada 1–2 s e revisar (ritmo, sobreposição, sincronia).
+- Legendas embutidas, transcrição, tradução e estilo de legenda.
+- Gerar ganchos e textos de post a partir da transcrição.
+
+**Cor, áudio e vídeo com IA**
+- Color grade com visual de cinema.
+- Limpeza de áudio: ruído, equalização, voz a −14 LUFS, efeitos (whoosh, tique, impacto, metal).
+- Gerar vídeos com IA (HeyGen text-to-video, Kairogen/Seedance/Kling) para B-roll realista e 3D; vídeos sem mostrar rosto.
+
+**Fluxo completo**
+- Roteiro → narração → edição → render num fluxo só, seguindo as regras desta skill.
