@@ -258,8 +258,8 @@ export const ChileVideo: React.FC = () => {
 							<Timeline from="2026" to="2029" p={eio((t - 10.6) / 1.6)} show={ease((t - 10.4) / 0.3)} top={0} />
 						</div>
 					</Glass>
-					<div style={{position: 'absolute', left: 0, right: 0, top: 1080, height: 700, opacity: ease((t - 6.9) / 0.4)}}>
-						<ThreeCanvas width={W} height={700}>
+					<div style={{position: 'absolute', left: 0, right: 0, top: 900, height: 540, opacity: ease((t - 6.9) / 0.4)}}>
+						<ThreeCanvas width={W} height={540}>
 							<CamRig pos={[2.6, 2.2, 3.4]} look={[0, 1.1, 0]} fov={40} />
 							<ambientLight intensity={0.5} />
 							<directionalLight position={[3, 5, 2]} intensity={2} />
@@ -267,7 +267,7 @@ export const ChileVideo: React.FC = () => {
 							<Building floors={14} p={eio((t - 7.0) / 5.0)} time={t} />
 						</ThreeCanvas>
 					</div>
-					<Label p={ease((t - 7.2) / 0.3)} style={{position: 'absolute', top: 1720, width: '100%', textAlign: 'center', fontSize: 26}}>
+					<Label p={ease((t - 7.2) / 0.3)} style={{position: 'absolute', top: 1620, width: '100%', textAlign: 'center', fontSize: 26}}>
 						EMPRESAS NO CHILE
 					</Label>
 				</AbsoluteFill>
@@ -394,8 +394,8 @@ export const ChileVideo: React.FC = () => {
 			{/* ===== S8: você escolhe onde guarda ===== */}
 			{s8 > 0 ? (
 				<AbsoluteFill style={{opacity: s8}}>
-					<div style={{position: 'absolute', left: 0, right: 0, top: 820, height: 760, opacity: ease((t - 33.0) / 0.5)}}>
-						<ThreeCanvas width={W} height={760}>
+					<div style={{position: 'absolute', left: 0, right: 0, top: 660, height: 720, opacity: ease((t - 33.0) / 0.5)}}>
+						<ThreeCanvas width={W} height={720}>
 							<CamRig pos={[0.6, 0.3, 4.2]} fov={36} />
 							<ambientLight intensity={0.5} />
 							<directionalLight position={[2, 3, 4]} intensity={2.4} />
