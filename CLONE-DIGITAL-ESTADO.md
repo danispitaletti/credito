@@ -28,7 +28,7 @@ Fontes:
 1. **Fotos novas** (3 a 5) para o avatar de foto — ainda não enviadas.
 2. **Áudios gravados** 01 e B1–B3 para os roteiros da conversa A — ainda não gravados.
 3. Confirmar o nome no roteiro 3 de `ROTEIROS-HEYGEN-02-11.md` ("Dani Spitaletti" x "Dani Sanverino").
-4. Responder ao conflito da conversa A sobre a lista do "não pode" (manter / ignorar só nestes roteiros / tirar).
+4. ~~Lista do "não pode"~~ — resolvido em 06/11 (ver seção 5).
 5. Apagar no app do HeyGen a voz quebrada "dani defibit" (…f2c).
 6. Opcional: reconectar a chave `sk_` do ElevenLabs no HeyGen, se quiser voltar a usar voz clonada.
 
@@ -36,7 +36,7 @@ Fontes:
 - **Voz:** A diz "só áudio gravado"; B usou voz de catálogo no Reels sem rosto. Proposta: áudio gravado quando o clone aparece; voz de catálogo só em vídeo sem pessoa.
 - **Terracota:** A usa `#B5502F`; B usou `#A3482F`. Escolher um.
 - **Roteiros de bloqueio:** a v4 (conversa A) tem "sem CPF e sem CNPJ"; na conversa B trocamos por "com mais privacidade e autonomia sobre o seu dinheiro".
-- **Lista do "não pode" (anúncios):** inclui "imposto" e "comente"; o Reels do Chile (conteúdo, não anúncio) fala da reforma tributária.
+- **Lista do "não pode" (anúncios): RESOLVIDO (06/11).** A Dani confirmou: **não existe lista de palavras proibidas nos anúncios**. A única regra é que ela **não fala sobre imposto** nos anúncios. Todo o resto ("comente", "salve", "siga", "link na bio", marcas etc.) está liberado.
 
 ## 6. Arquivos da conversa A (no seu computador)
 - `campanhas\ROTEIROS-HEYGEN-02-11.md` — 10 roteiros "Camada Financeira Secreta" (roteiro 1 aguardando áudio).
